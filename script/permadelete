@@ -19,9 +19,8 @@ end
 
 owner = User.find_by_email!(email)
 
-require 'highline'
-terminal = HighLine.new
-confirm  = terminal.ask "Permanently delete #{name} with #{versions.size} versions? (y/N)"
+puts "Permanently delete #{name} with #{versions.size} versions? (y/N)"
+confirm = gets.chomp
 
 if confirm.casecmp("Y") || confirm.casecmp("YES")
   versions.each do |version|

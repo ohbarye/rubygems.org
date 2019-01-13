@@ -10,19 +10,20 @@ require_relative '../config/environment'
 first_user  = User.find_by_email!(first)
 second_user = User.find_by_email!(second)
 
-require 'highline'
-terminal = HighLine.new
-
 puts "Which email do you want to keep?"
-email = terminal.choose do |menu|
-  menu.choice first_user.email
-  menu.choice second_user.email
+puts first_user.email
+puts second_user.email
+while email = gets.chomp
+  break if [first_user.email, second_user.email].include? email
+  puts "You must choose one of [#{first_user.email}, #{second_user.email}]"
 end
 
 puts "Which handle do you want to keep?"
-handle = terminal.choose do |menu|
-  menu.choice first_user.handle
-  menu.choice second_user.handle
+puts first_user.handle
+puts second_user.handle
+while handle = gets.chomp
+  break if [first_user.handle, second_user.handle].include? handle
+  puts "You must choose one of [#{first_user.handle}, #{second_user.handle}]"
 end
 
 if email == first_user.email
